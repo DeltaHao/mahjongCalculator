@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        tools:ignore="MissingConstraints">
+
+        <EditText
+            android:id="@+id/player_nickname"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/player_points"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            tools:ignore="RtlHardcoded"
+            android:textSize="18dp"/>
+        <Button
+            android:id="@+id/player_selfTouch_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="自摸"
+            android:layout_marginLeft="20dp"
+            android:layout_marginStart="20dp" />
+        <Button
+            android:id="@+id/player_fireOff_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="点炮"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
