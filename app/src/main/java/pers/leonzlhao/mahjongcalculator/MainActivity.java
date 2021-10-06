@@ -8,11 +8,13 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
+    private Button addPlayerButton;
     private GameManager manager;
     private ListView playerListView;
     private PlayerListViewAdapter playerListViewAdapter;
@@ -24,7 +26,52 @@ public class MainActivity extends AppCompatActivity {
         playerListView = (ListView) findViewById(R.id.player_listView);
         playerListViewAdapter = new PlayerListViewAdapter(MainActivity.this, manager.players);
         playerListView.setAdapter(playerListViewAdapter);
+
+        addPlayerButton = findViewById(R.id.add_player_btn);
+        addPlayerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showReplacePlayerDialog();
+            }
+        });
     }
+
+    private void showReplacePlayerDialog() {
+        final String[] playerNames = new String[4];
+        int i = 0;
+
+        for (Player p: manager.players) {
+            if(p.isOnline) {
+                playerNames[i] = p.nickName;
+                i++;
+            }
+        }
+
+        AlertDialog.Builder ReplacePlayerDialog = new AlertDialog.Builder(MainActivity.this);
+        ReplacePlayerDialog.setTitle("替换一个在场玩家");
+        final int[] replacedPlayerIndex = {-1};
+        ReplacePlayerDialog.setSingleChoiceItems(playerNames, -1, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                for (Player p: manager.players) {
+                    if (p.nickName.equals(playerNames[which])){
+                        replacedPlayerIndex[0] = p.index;
+                    }
+                }
+            }
+        });
+        ReplacePlayerDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if(replacedPlayerIndex[0] != -1) {
+                    manager.addPlayer(manager.players.get(replacedPlayerIndex[0]));
+                    playerListViewAdapter.notifyDataSetChanged();
+                }
+            }
+        }).show();
+    }
+
+
 
     public boolean dispatchTouchEvent(MotionEvent ev) {
         if (ev.getAction() == MotionEvent.ACTION_DOWN) {

@@ -13,10 +13,6 @@ public class Player {
         mObserver = observer;
     }
 
-    public void ChangeNickName(String newName) {
-        nickName = newName;
-    }
-
     public void selfTouch(int score) {
         this.points += score * 3;
         mObserver.onSelfTouch(this, score);

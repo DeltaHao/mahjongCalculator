@@ -7,15 +7,26 @@
     tools:context="pers.leonzlhao.mahjongcalculator.MainActivity"
     >
 
+    <Button
+        android:id="@+id/add_player_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="+ 添加玩家"
+        tools:ignore="MissingConstraints"/>
+
     <ListView
+        android:layout_marginTop="50dp"
         android:id="@+id/player_listView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:divider="#FFAAAAAA"
         android:dividerHeight="1dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

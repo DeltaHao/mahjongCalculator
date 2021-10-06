@@ -3,10 +3,8 @@ package pers.leonzlhao.mahjongcalculator;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -61,10 +59,23 @@ public class PlayerListViewAdapter extends BaseAdapter {
         }
         //2、绑定数据到控件
         bindViewData(position, convertView, holder);
+
         //3、绑定监听事件
         bindViewClickListener(position, convertView, holder);
 
+        //4、根据事件刷新页面
+        refreshView(position, convertView, holder);
+
         return convertView;
+    }
+
+    private void refreshView(int position, View convertView, ViewHolder holder) {
+        if(!mPlayers.get(position).isOnline) {
+            holder.selfTouchButton.setEnabled(false);
+            holder.selfTouchButton.setClickable(false);
+            holder.fireOffButton.setEnabled(false);
+            holder.fireOffButton.setClickable(false);
+        }
     }
 
     class ViewHolder {
@@ -140,8 +151,8 @@ public class PlayerListViewAdapter extends BaseAdapter {
         AlertDialog.Builder fireOffDialog = new AlertDialog.Builder(mContext);
         fireOffDialog.setTitle(mPlayers.get(position).nickName + "点炮");
         fireOffDialog.setView(editText);
-        final int[] firedPlayerIndex = new int[1];
-        fireOffDialog.setSingleChoiceItems(playerNames, 0, new DialogInterface.OnClickListener() {
+        final int[] firedPlayerIndex = {-1};
+        fireOffDialog.setSingleChoiceItems(playerNames, -1, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 for (Player p: mPlayers) {
@@ -154,7 +165,7 @@ public class PlayerListViewAdapter extends BaseAdapter {
         fireOffDialog.setPositiveButton("确定", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if(!editText.getText().toString().isEmpty()) {
+                if(!editText.getText().toString().isEmpty() && firedPlayerIndex[0] != -1) {
                     Toast.makeText(mContext, "恭喜" + mPlayers.get(position).nickName + "!", Toast.LENGTH_SHORT).show();
                     mPlayers.get(position).fireOff(Integer.parseInt(editText.getText().toString()), mPlayers.get(firedPlayerIndex[0]));
                 }

@@ -20,6 +20,7 @@ public class GameManager implements PlayerObserver {
 
     public void addPlayer(Player replacedPlayer) {
         replacedPlayer.isOnline = false;
+        players.add(new Player(players.size(), this));
     }
 
     @Override
