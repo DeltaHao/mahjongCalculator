@@ -14,10 +14,12 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    private Button addPlayerButton;
+
     private GameManager manager;
     private ListView playerListView;
     private PlayerListViewAdapter playerListViewAdapter;
+    private Button addPlayerButton;
+    private Button clearPointsButton;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 showReplacePlayerDialog();
+            }
+        });
+        clearPointsButton = findViewById(R.id.clear_points_btn);
+        clearPointsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                manager.clearPoints();
+                playerListViewAdapter.notifyDataSetChanged();
             }
         });
     }
@@ -66,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                 if(replacedPlayerIndex[0] != -1) {
                     manager.addPlayer(manager.players.get(replacedPlayerIndex[0]));
                     playerListViewAdapter.notifyDataSetChanged();
+                } else {
+                    Toast.makeText(MainActivity.this, "请检查输入!", Toast.LENGTH_SHORT).show();
                 }
             }
         }).show();

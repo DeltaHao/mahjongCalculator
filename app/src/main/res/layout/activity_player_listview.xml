@@ -6,16 +6,29 @@
     android:layout_height="match_parent"
     tools:context="pers.leonzlhao.mahjongcalculator.MainActivity"
     >
-
-    <Button
-        android:id="@+id/add_player_btn"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="+ 添加玩家"
-        tools:ignore="MissingConstraints"/>
+        tools:ignore="MissingConstraints"
+        android:orientation="vertical">
+        <Button
+            android:id="@+id/add_player_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="+ 添加玩家"
+            tools:ignore="MissingConstraints"/>
+
+        <Button
+            android:id="@+id/clear_points_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="- 清空分数"
+            tools:ignore="MissingConstraints"/>
+    </LinearLayout>
+
 
     <ListView
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="100dp"
         android:id="@+id/player_listView"
         android:layout_width="0dp"
         android:layout_height="0dp"

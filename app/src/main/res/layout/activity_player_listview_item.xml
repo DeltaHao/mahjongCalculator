@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/player_points"
-            android:layout_width="100dp"
+            android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
             tools:ignore="RtlHardcoded"
@@ -27,16 +27,27 @@
             android:id="@+id/player_selfTouch_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="0dp"
             android:text="自摸"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="5dp"
             android:layout_marginStart="20dp" />
         <Button
             android:id="@+id/player_fireOff_btn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minWidth="0dp"
             android:text="点炮"
             android:layout_marginLeft="5dp"
             android:layout_marginStart="5dp" />
+        <Button
+            android:id="@+id/player_backOnline_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:minWidth="0dp"
+            android:text="上线"
+            android:layout_marginLeft="5dp"
+            android:backgroundTint="@color/purple_200"/>
+
 
     </LinearLayout>
 

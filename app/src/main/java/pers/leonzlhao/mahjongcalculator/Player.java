@@ -19,8 +19,13 @@ public class Player {
     }
 
     public void fireOff(int score, Player firedPlayer) {
-        this.points += score;
+        this.points -= score;
         mObserver.onFireOff(score, firedPlayer);
+    }
+
+    public void backOnline(Player replacedPlayer) {
+        this.isOnline = true;
+        mObserver.onBackOnline(replacedPlayer);
     }
 
     public void followWind(int score) {

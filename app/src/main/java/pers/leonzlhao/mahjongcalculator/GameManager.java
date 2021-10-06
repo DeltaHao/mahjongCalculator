@@ -23,6 +23,12 @@ public class GameManager implements PlayerObserver {
         players.add(new Player(players.size(), this));
     }
 
+    public void clearPoints() {
+        for (Player p: players) {
+            p.points = 0;
+        }
+    }
+
     @Override
     public void onSelfTouch(Player touchPlayer, int score) {
         for(Player player: players) {
@@ -37,8 +43,13 @@ public class GameManager implements PlayerObserver {
     @Override
     public void onFireOff(int score, Player firedPlayer) {
         if(firedPlayer.isOnline) {
-            firedPlayer.points -= score;
+            firedPlayer.points += score;
         }
+    }
+
+    @Override
+    public void onBackOnline(Player replacedPlayer) {
+        replacedPlayer.isOnline = false;
     }
 
     @Override
